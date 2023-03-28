@@ -1,0 +1,42 @@
+<div class="card text-bg-light mb3">
+    <div class="card-header">Incidencias</div>
+    <div class="card-body">
+        <button class="btn btn-secondary my-2" routerLink="/incidencia/form">Crear</button>
+        <div class="alert alert-info" *ngIf="lista?.length == 0">
+            No hay incidencias
+        </div>
+        <table class="table table-hover table-striped" *ngIf="lista?.length> 0">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Reporta</th>
+                    <th>Reportado</th>
+                    <th>Estatus</th>
+                    <th>Descripcion</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of lista">
+                    <td> {{i?.fecha | date}} </td>
+                    <td> {{i?.reporta?.nombre | titlecase}} </td>
+                    <td> {{i.reportado?.nombre | titlecase}} </td>
+                    <td> {{i.status}} </td>
+                    <td> {{i.descripcion}} </td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm"
+                                [routerLink]="['/incidencia/form', i.id]">
+                            Editar
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="eliminar(i)">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="card text-bg-light mb3">
+    <div class="card-header">Personas</div>
+    <div class="card-body">
+        <button class="btn btn-secondary my-2" routerLink="/persona/form">Crear</button>
+        <div class="alert alert-info" *ngIf="lista?.length == 0">
+            No hay personas
+        </div>
+        <table class="table table-hover table-striped" *ngIf="lista?.length> 0">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Unidad de Negocio</th>
+                    <th>Supervisor</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of lista">
+                    <td> {{p?.nombre | titlecase}} </td>
+                    <td> {{p?.unidadNegocio?.nombre | titlecase}} </td>
+                    <td> {{p.supervisor?.nombre | titlecase}} </td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm"
+                                [routerLink]="['/persona/form', p.id]">
+                            Editar
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="eliminar(p)">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

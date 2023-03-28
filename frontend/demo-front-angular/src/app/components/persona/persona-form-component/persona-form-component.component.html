@@ -1,0 +1,52 @@
+<div class="card text-bg-light mb-3">
+    <div class="card-header"> {{titulo}} </div>
+    <div class="card-body">
+        <button class="btn btn-secondary my-2" routerLink="/unidadnegocio">Volver</button>
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control my-1" id="nombre"
+                [(ngModel)]="persona.nombre">
+                <!--
+                <div class="alert alert-danger" *ngIf="error?.nombre">
+                    {{error?.nombre}}
+                </div>
+                -->                
+            </div>
+
+            <div class="form-group" >
+                <label for="unidad">Unidad de Negocio Padre</label>
+                <select [(ngModel)]="unidadNegocio.id" (change)="asignarUnidad()"
+                        name="unidad" id="unidad" class="form-control">
+                        <option [ngValue]="null">--- Seleccionar Unidad de negocio ---</option>
+                        <option *ngFor="let unidad of unidades" [ngValue]="unidad.id"> 
+                            {{unidad.nombre}} 
+                        </option>
+                    </select>
+                    
+                <!--
+                <div class="alert alert-danger" *ngIf="error?.unidadPadre">
+                    {{error.unidadPadre}}
+                </div>
+                -->
+            </div>
+
+            <div class="form-group">
+                <label for="gerente">Supervisor</label>
+                <select [(ngModel)]="supervisor.id" (change)="asignarSupervisor()"
+                        name="supervisor" id="supervisor" class="form-control">
+                        <option [ngValue]="null">--- Seleccionar Supervisor ---</option>
+                        <option *ngFor="let persona of personas" [ngValue]="persona.id"> 
+                            {{persona.nombre}} 
+                        </option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary my-3"
+                        (click)="persona.id ? editar() : crear()">
+                    {{persona.id ? 'Editar': 'Crear'}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
